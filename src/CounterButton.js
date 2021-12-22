@@ -1,13 +1,12 @@
-import { useContext, useState } from "react";
-import { CounterContext } from "./CounterContext";
+import { useState } from "react";
+import { observer } from "mobx-react";
 
-export const CounterButton = () => {
-	const { numberOfClicks, increment } = useContext(CounterContext);
+export const CounterButton = observer(({counter}) => {
 	const [incrementBy, setIncrementBy] = useState(1);
 
 	return (
 		<>
-		<p>You have clicked the button {numberOfClicks} times.</p>
+		<p>You have clicked the button {counter.numberOfClicks} times.</p>
 		<label>
 			Increment By:
 			<input
@@ -16,8 +15,8 @@ export const CounterButton = () => {
 				type="number" />
 		</label>
 		<button
-			onClick={() => increment(incrementBy)}
+			onClick={() => counter.increment(incrementBy)}
 		>Click</button>
 		</>
 	)
-}
+});
